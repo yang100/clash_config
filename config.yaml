@@ -97,10 +97,18 @@ rules:
   - RULE-SET,greatfire,PROXY
   - RULE-SET,telegramcidr,PROXY
   - RULE-SET,mypac,PROXY
+  - RULE-SET,developer,PROXY
 
   - DOMAIN-KEYWORD,google.com,PROXY
   - MATCH,DIRECT
 rule-providers:
+  developer:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/yang100/clash_config/main/clash-rules/developer.txt"
+    path: ./ruleset/developer.yaml
+    interval: 86400
+
   mypac:
     type: http
     behavior: domain
