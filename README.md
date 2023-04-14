@@ -1,2 +1,2 @@
 # clash_config
-clash 配置文件
+自用 clash 配置文件
