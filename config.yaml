@@ -1,0 +1,207 @@
+mixed-port: 7890
+allow-lan: false
+external-controller: 127.0.0.1:58255
+secret: 36ae398a-bd3e-4e28-9c64-102a1af75872
+proxies:
+  - name: JMS-637944@c55s1.jjvip8.com:17560
+    server: 65.49.201.103
+    port: 17560
+    type: ss
+    cipher: aes-256-gcm
+    password: 2GYezDhXuDswaL4g
+    udp: true
+  - name: JMS-637944@c55s2.jjvip8.com:17560
+    server: 199.115.230.145
+    port: 17560
+    type: ss
+    cipher: aes-256-gcm
+    password: 2GYezDhXuDswaL4g
+    udp: true
+  - name: JMS-637944@c55s3.jjvip8.com:17560
+    server: 64.64.231.169
+    port: 17560
+    type: vmess
+    uuid: 6e85be59-88fb-4105-8978-1af3d2b53dc8
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: ""
+    udp: true
+  - name: JMS-637944@c55s4.jjvip8.com:17560
+    server: 178.157.56.59
+    port: 17560
+    type: vmess
+    uuid: 6e85be59-88fb-4105-8978-1af3d2b53dc8
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: ""
+    udp: true
+  - name: JMS-637944@c55s5.jjvip8.com:17560
+    server: 104.245.101.248
+    port: 17560
+    type: vmess
+    uuid: 6e85be59-88fb-4105-8978-1af3d2b53dc8
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: ""
+    udp: true
+  - name: JMS-637944@c55s801.jjvip8.com:17560
+    server: 174.137.54.135
+    port: 17560
+    type: vmess
+    uuid: 6e85be59-88fb-4105-8978-1af3d2b53dc8
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: ""
+    udp: true
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - JMS-637944@c55s1.jjvip8.com:17560
+      - JMS-637944@c55s2.jjvip8.com:17560
+      - JMS-637944@c55s3.jjvip8.com:17560
+      - JMS-637944@c55s4.jjvip8.com:17560
+      - JMS-637944@c55s5.jjvip8.com:17560
+      - JMS-637944@c55s801.jjvip8.com:17560
+  - name: Auto
+    type: url-test
+    proxies:
+      - JMS-637944@c55s1.jjvip8.com:17560
+      - JMS-637944@c55s2.jjvip8.com:17560
+      - JMS-637944@c55s3.jjvip8.com:17560
+      - JMS-637944@c55s4.jjvip8.com:17560
+      - JMS-637944@c55s5.jjvip8.com:17560
+      - JMS-637944@c55s801.jjvip8.com:17560
+      - DIRECT
+    url: 'http://www.baidu.com/'
+    interval: 300
+rules:
+  - PROCESS-NAME,Notion.exe,Auto
+  - PROCESS-NAME,ChatGPT.exe,PROXY
+  
+  - RULE-SET,applications,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,reject,REJECT
+  - RULE-SET,tld-not-cn,PROXY
+  - RULE-SET,gfw,PROXY
+  - RULE-SET,greatfire,PROXY
+  - RULE-SET,telegramcidr,PROXY
+  - RULE-SET,mypac,PROXY
+
+  - DOMAIN-KEYWORD,google.com,PROXY
+  - MATCH,DIRECT
+rule-providers:
+  mypac:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/yang100/clash_config/main/clash-rules/mypac.txt"
+    path: ./ruleset/mypac.yaml
+    interval: 86400
+
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+
+  icloud:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
+    path: ./ruleset/icloud.yaml
+    interval: 86400
+
+  apple:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
+    path: ./ruleset/apple.yaml
+    interval: 86400
+
+  google:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
+    path: ./ruleset/google.yaml
+    interval: 86400
+
+  proxy:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    path: ./ruleset/proxy.yaml
+    interval: 86400
+
+  direct:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/direct.yaml
+    interval: 86400
+
+  private:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+    path: ./ruleset/private.yaml
+    interval: 86400
+
+  gfw:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/gfw.yaml
+    interval: 86400
+
+  greatfire:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt"
+    path: ./ruleset/greatfire.yaml
+    interval: 86400
+
+  tld-not-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./ruleset/tld-not-cn.yaml
+    interval: 86400
+
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./ruleset/telegramcidr.yaml
+    interval: 86400
+
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+    path: ./ruleset/cncidr.yaml
+    interval: 86400
+
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+    path: ./ruleset/lancidr.yaml
+    interval: 86400
+
+  applications:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+    path: ./ruleset/applications.yaml
+    interval: 86400
