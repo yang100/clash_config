@@ -210,3 +210,4 @@ payload:
   - '+.wsjemail.com'
   - '+.fbcdn.net'
   - '+.githubusercontent.com'
+  - '+.notion.so'

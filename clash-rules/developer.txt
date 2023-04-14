@@ -14,3 +14,4 @@ payload:
   - '+.hub.docker.com'
   - '+.docker.io'
   - '+.nodesource.com'
+  - '+.goo.gle'
