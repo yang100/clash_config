@@ -211,3 +211,5 @@ payload:
   - '+.fbcdn.net'
   - '+.githubusercontent.com'
   - '+.notion.so'
+  - '+.googleadservices.com'
+  - '+.fiverr.com'
