@@ -3,22 +3,22 @@ allow-lan: false
 external-controller: 127.0.0.1:58255
 secret: 36ae398a-bd3e-4e28-9c64-102a1af75872
 proxies:
-  - name: JMS-637944@c55s1.jjvip8.com:17560
-    server: 65.49.201.103
+  - name: JustMySocks01
+    server: c55s1.jjvip8.com
     port: 17560
     type: ss
     cipher: aes-256-gcm
     password: 2GYezDhXuDswaL4g
     udp: true
-  - name: JMS-637944@c55s2.jjvip8.com:17560
-    server: 199.115.230.145
+  - name: JustMySocks02
+    server: c55s2.jjvip8.com
     port: 17560
     type: ss
     cipher: aes-256-gcm
     password: 2GYezDhXuDswaL4g
     udp: true
-  - name: JMS-637944@c55s3.jjvip8.com:17560
-    server: 64.64.231.169
+  - name: JustMySocks03
+    server: c55s3.jjvip8.com
     port: 17560
     type: vmess
     uuid: 6e85be59-88fb-4105-8978-1af3d2b53dc8
@@ -28,8 +28,8 @@ proxies:
     skip-cert-verify: true
     servername: ""
     udp: true
-  - name: JMS-637944@c55s4.jjvip8.com:17560
-    server: 178.157.56.59
+  - name: JustMySocks04
+    server: c55s4.jjvip8.com
     port: 17560
     type: vmess
     uuid: 6e85be59-88fb-4105-8978-1af3d2b53dc8
@@ -39,8 +39,8 @@ proxies:
     skip-cert-verify: true
     servername: ""
     udp: true
-  - name: JMS-637944@c55s5.jjvip8.com:17560
-    server: 104.245.101.248
+  - name: JustMySocks05
+    server: c55s5.jjvip8.com
     port: 17560
     type: vmess
     uuid: 6e85be59-88fb-4105-8978-1af3d2b53dc8
@@ -50,8 +50,8 @@ proxies:
     skip-cert-verify: true
     servername: ""
     udp: true
-  - name: JMS-637944@c55s801.jjvip8.com:17560
-    server: 174.137.54.135
+  - name: JustMySocks06
+    server: c55s801.jjvip8.com
     port: 17560
     type: vmess
     uuid: 6e85be59-88fb-4105-8978-1af3d2b53dc8
@@ -65,40 +65,37 @@ proxy-groups:
   - name: PROXY
     type: select
     proxies:
-      - JMS-637944@c55s1.jjvip8.com:17560
-      - JMS-637944@c55s2.jjvip8.com:17560
-      - JMS-637944@c55s3.jjvip8.com:17560
-      - JMS-637944@c55s4.jjvip8.com:17560
-      - JMS-637944@c55s5.jjvip8.com:17560
-      - JMS-637944@c55s801.jjvip8.com:17560
-  - name: Auto
+      - JustMySocks01
+      - JustMySocks02
+      - JustMySocks03
+      - JustMySocks04
+      - JustMySocks05
+      - JustMySocks06
+  - name: AutoProxy
     type: url-test
     proxies:
-      - JMS-637944@c55s1.jjvip8.com:17560
-      - JMS-637944@c55s2.jjvip8.com:17560
-      - JMS-637944@c55s3.jjvip8.com:17560
-      - JMS-637944@c55s4.jjvip8.com:17560
-      - JMS-637944@c55s5.jjvip8.com:17560
-      - JMS-637944@c55s801.jjvip8.com:17560
-      - DIRECT
-    url: 'http://www.baidu.com/'
+      - JustMySocks01
+      - JustMySocks02
+      - JustMySocks03
+      - JustMySocks04
+      - JustMySocks05
+      - JustMySocks06
+    url: 'http://www.google.com/'
     interval: 300
-rules:
-  - PROCESS-NAME,Notion.exe,Auto
-  - PROCESS-NAME,ChatGPT.exe,PROXY
-  
+rules:  
   - RULE-SET,applications,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
   - RULE-SET,private,DIRECT
-  - RULE-SET,reject,REJECT
+  # - RULE-SET,reject,REJECT # google 广告打不开
   - RULE-SET,tld-not-cn,PROXY
   - RULE-SET,gfw,PROXY
   - RULE-SET,greatfire,PROXY
   - RULE-SET,telegramcidr,PROXY
   - RULE-SET,mypac,PROXY
   - RULE-SET,developer,PROXY
-
+  
+  - PROCESS-NAME,chrome.exe,PROXY
   - DOMAIN-KEYWORD,google.com,PROXY
   - MATCH,DIRECT
 rule-providers:
