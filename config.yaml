@@ -86,6 +86,7 @@ rules:
   - RULE-SET,applications,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
+  
   - RULE-SET,private,DIRECT
   # - RULE-SET,reject,REJECT # google 广告打不开
   - RULE-SET,tld-not-cn,PROXY
@@ -94,8 +95,12 @@ rules:
   - RULE-SET,telegramcidr,PROXY
   - RULE-SET,mypac,PROXY
   - RULE-SET,developer,PROXY
+
+  - PROCESS-NAME,AdobeIPCBroker.exe,REJECT
+  - PROCESS-NAME,AGMService.exe,REJECT
+  - PROCESS-NAME,AGSService.exe,REJECT
   
-  - PROCESS-NAME,chrome.exe,PROXY
+  # - PROCESS-NAME,chrome.exe,PROXY
   - DOMAIN-KEYWORD,google.com,PROXY
   - MATCH,DIRECT
 rule-providers:
